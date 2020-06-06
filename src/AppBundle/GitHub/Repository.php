@@ -47,9 +47,9 @@ class Repository
     }
 
     /**
-     * @return mixed
+     * @return string | null
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
