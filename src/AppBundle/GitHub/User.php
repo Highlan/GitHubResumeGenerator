@@ -11,6 +11,7 @@ class User implements UserInterface
     private $helper;
     private $username;
     private $blog;
+    private $repositories;
 
 
     public function __construct(GitHubApiHelper $helper, RequestStack $request)
@@ -21,7 +22,9 @@ class User implements UserInterface
         $user = $this->helper->getUser($username);
         $this->username = $user['login'];
         $this->blog = $user['blog'];
-        dump($user);exit;
+
+        $this->repositories = $this->helper->getRepositories($username);
+        dump($this->repositories); exit;
     }
 
     public function getUsername(): string
