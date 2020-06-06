@@ -24,7 +24,7 @@ class User implements UserInterface
         $this->blog = $user['blog'];
 
         $this->repositories = $this->helper->getRepositories($username);
-        dump($this->repositories); exit;
+
     }
 
     public function getUsername(): string
@@ -37,9 +37,12 @@ class User implements UserInterface
         return $this->blog;
     }
 
+    /**
+     * @return Repository[]
+     */
     public function getRepositories(): array
     {
-        // TODO: Implement getRepositories() method.
+        return $this->repositories->getRepositories();
     }
 
     public function getLanguages(): array

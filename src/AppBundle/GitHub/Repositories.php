@@ -4,10 +4,12 @@ namespace AppBundle\GitHub;
 
 
 use AppBundle\Entity\RepositoriesInterface;
-use Traversable;
 
 class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterface
 {
+    const REPOSITORIES_MOST_POPULAR_LIMIT = 5;
+
+
     private $repositories;
 
 
@@ -26,13 +28,29 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
         // TODO: Implement count() method.
     }
 
-    public function getRepositories()
+    /**
+     * @return Repository[]
+     */
+    public function getRepositories($limit = self::REPOSITORIES_MOST_POPULAR_LIMIT): array
     {
-        // TODO: Implement getRepositories() method.
+        $this->sortRepositoriesByPopularity();
+        return $this->separateTopBy($this->repositories, $limit);
     }
 
     public function getLanguages()
     {
         // TODO: Implement getLanguages() method.
+    }
+
+
+    private function sortRepositoriesByPopularity(): void
+    {
+        usort($this->repositories, function($repo1, $repo2) {
+            return $repo2->getPopularity() <=> $repo1->getPopularity();
+        });
+    }
+    private function separateTopBy(array $array, int $limit): array
+    {
+        return array_slice($array, 0, $limit);
     }
 }
