@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\UserInterface;
 use AppBundle\Form\UserFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,8 +32,13 @@ class MainController extends AbstractController
     /**
      * @Route("resume", name="resume")
      */
-    public function resumeAction()
+    public function resumeAction(UserInterface $user)
     {
-        echo 'resume';exit;
+        return $this->render('/main/resume.html.twig', [
+            'username'     => $user->getUsername(),
+            'blog'         => $user->getBlog(),
+            'repositories' => $user->getRepositories(),
+            'languages'    => $user->getLanguages()
+        ]);
     }
 }
