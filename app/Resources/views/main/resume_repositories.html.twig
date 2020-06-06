@@ -1,0 +1,16 @@
+Popular Repositories
+{% if repositories is not empty %}
+    <ul>
+        {% for repository in repositories %}
+            <li>
+                <a href="{{ repository.link }}">{{ repository.name }}</a>
+                <br>
+                {{ repository.description }}
+                <br>
+                This repository has {{ repository.watchers }} stars and {{ repository.forks }} forks.
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    -
+{% endif %}
