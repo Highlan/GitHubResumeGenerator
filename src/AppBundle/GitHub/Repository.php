@@ -70,5 +70,10 @@ class Repository
         return $this->forks;
     }
 
+    public function getPopularity() : int
+    {
+        return $this->forks + $this->watchers;
+    }
+
 
 }
