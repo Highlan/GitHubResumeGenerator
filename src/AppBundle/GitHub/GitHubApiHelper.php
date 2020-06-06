@@ -77,7 +77,7 @@ class GitHubApiHelper
 
         if ($response->getStatusCode() !== Response::HTTP_OK)
         {
-            dump($response->getStatusCode() ); exit;
+            ExceptionThrower::throw($response);
         }
 
         return $response->toArray();
