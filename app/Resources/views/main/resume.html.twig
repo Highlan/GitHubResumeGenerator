@@ -2,7 +2,11 @@
 
 {% block body %}
 
-    <h1>{{ username }}</h1>
+    <h1>
+        <a href="https://github.com/{{ username }}">
+            {{ username | upper}}
+        </a>
+    </h1>
 
     Website
     {% if blog is not empty %}
@@ -10,6 +14,7 @@
     {% else %}
         -
     {% endif %}
+
     <br>
 
     {% include('main/resume_languages.html.twig') %}

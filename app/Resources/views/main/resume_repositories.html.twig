@@ -3,11 +3,15 @@ Popular Repositories
     <ul>
         {% for repository in repositories %}
             <li>
-                <a href="{{ repository.link }}">{{ repository.name }}</a>
-                <br>
-                {{ repository.description }}
-                <br>
-                This repository has {{ repository.watchers }} stars and {{ repository.forks }} forks.
+                <p>
+                    <a href="{{ repository.link }}">{{ repository.name }}</a>
+                    <br>
+                    {% if repository.description is not empty %}
+                        {{ repository.description }}
+                        <br>
+                    {% endif %}
+                    This repository has {{ repository.watchers }} stars and {{ repository.forks }} forks.
+                </p>
             </li>
         {% endfor %}
     </ul>
