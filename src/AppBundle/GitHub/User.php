@@ -4,24 +4,34 @@ namespace AppBundle\GitHub;
 
 
 use AppBundle\Entity\UserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class User implements UserInterface
 {
+    private $helper;
+    private $username;
+    private $blog;
 
 
-    public function __construct()
+    public function __construct(GitHubApiHelper $helper, RequestStack $request)
     {
+        $username = $request->getCurrentRequest()->get('username');
+        $this->helper = $helper;
 
+        $user = $this->helper->getUser($username);
+        $this->username = $user['login'];
+        $this->blog = $user['blog'];
+        dump($user);exit;
     }
 
     public function getUsername(): string
     {
-        // TODO: Implement getUsername() method.
+        return $this->username;
     }
 
     public function getBlog(): string
     {
-        // TODO: Implement getBlog() method.
+        return $this->blog;
     }
 
     public function getRepositories(): array

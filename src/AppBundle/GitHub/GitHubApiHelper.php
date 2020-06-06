@@ -21,9 +21,9 @@ class GitHubApiHelper
         ]]);
     }
 
-    public function getUser()
+    public function getUser($username)
     {
-
+        return $this->request('GET', 'users/' . rawurlencode($username));
     }
 
     private function request(string $method, string $url,  array $option = [])
