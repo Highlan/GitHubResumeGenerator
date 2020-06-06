@@ -5,6 +5,6 @@ namespace AppBundle\Entity;
 
 interface RepositoriesInterface
 {
-    public function getRepositories();
-    public function getLanguages();
+    public function getRepositories(): array;
+    public function getLanguages(): array;
 }
