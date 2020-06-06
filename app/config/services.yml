@@ -33,3 +33,8 @@ services:
         tags: [controller.service_arguments]
         bind:
             $user: '@AppBundle\GitHub\User'
+
+    published_message.listener:
+        class: 'AppBundle\EventListener\PublishedMessageExceptionListener'
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
