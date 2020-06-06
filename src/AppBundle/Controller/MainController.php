@@ -34,7 +34,6 @@ class MainController extends AbstractController
      */
     public function resumeAction(UserInterface $user)
     {
-        dump($user->getLanguages());exit;
         return $this->render('/main/resume.html.twig', [
             'username'     => $user->getUsername(),
             'blog'         => $user->getBlog(),

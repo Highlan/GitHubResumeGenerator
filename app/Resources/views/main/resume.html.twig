@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ username }}</h1>
+
+    Website
+    {% if blog is not empty %}
+        <a href="{{ blog }}">{{ blog }}</a>
+    {% else %}
+        -
+    {% endif %}
+    <br>
+
+    Languages
+    {% if languages is not empty %}
+        <ul>
+            {% for key, language in languages %}
+                <li>{{ key }} : {{ language }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        -
+    {% endif %}
+    <br>
+
+    Popular Repositories
+    {% if repositories is not empty %}
+        <ul>
+            {% for repository in repositories %}
+                <li>
+                    <a href="{{ repository.link }}">{{ repository.name }}</a>
+                    <br>
+                    {{ repository.description }}
+                    <br>
+                    This repository has {{ repository.watchers }} stars and {{ repository.forks }} forks.
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        -
+    {% endif %}
+{% endblock %}
