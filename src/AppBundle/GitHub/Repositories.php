@@ -4,6 +4,7 @@ namespace AppBundle\GitHub;
 
 
 use AppBundle\Entity\RepositoriesInterface;
+use AppBundle\Entity\RepositoryInterface;
 use AppBundle\Service\Math;
 
 class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterface
@@ -16,7 +17,7 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
     private $languages;
 
 
-    public function __construct(Repository ...$repositories) {
+    public function __construct(RepositoryInterface ...$repositories) {
         $this->repositories = $repositories;
     }
 

@@ -3,7 +3,9 @@
 namespace AppBundle\GitHub;
 
 
-class Repository
+use AppBundle\Entity\RepositoryInterface;
+
+class Repository implements RepositoryInterface
 {
     private $name;
     private $language;
