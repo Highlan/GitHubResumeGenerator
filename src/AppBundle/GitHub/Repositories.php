@@ -4,13 +4,16 @@ namespace AppBundle\GitHub;
 
 
 use AppBundle\Entity\RepositoriesInterface;
+use AppBundle\Service\Math;
 
 class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterface
 {
     const REPOSITORIES_MOST_POPULAR_LIMIT = 5;
+    const LANGUAGES_MOST_USED_LIMIT = 9;
 
 
     private $repositories;
+    private $languages;
 
 
     public function __construct(Repository ...$repositories) {
@@ -20,12 +23,12 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
 
     public function getIterator()
     {
-        // TODO: Implement getIterator() method.
+        return new \ArrayIterator($this->repositories);
     }
 
     public function count()
     {
-        // TODO: Implement count() method.
+        return sizeof($this->repositories);
     }
 
     /**
@@ -37,9 +40,31 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
         return $this->separateTopBy($this->repositories, $limit);
     }
 
-    public function getLanguages()
+    public function getLanguages($limit = self::LANGUAGES_MOST_USED_LIMIT): array
     {
-        // TODO: Implement getLanguages() method.
+        $this->languages = array();
+
+        foreach ($this->repositories as $repository)
+        {
+            if (is_null($repository->getLanguage()))
+            {
+                continue;
+            }
+
+            if (key_exists($repository->getLanguage(), $this->languages))
+            {
+                $this->languages[$repository->getLanguage()]++;
+            }
+            else
+            {
+                $this->languages[$repository->getLanguage()] = 1;
+            }
+        }
+
+        $this->calculateLanguagesUsagePercentage();
+        $this->sortLanguagesByUsage();
+
+        return $this->separateTopBy($this->languages, $limit);
     }
 
 
@@ -48,6 +73,19 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
         usort($this->repositories, function($repo1, $repo2) {
             return $repo2->getPopularity() <=> $repo1->getPopularity();
         });
+    }
+    private function calculateLanguagesUsagePercentage(): void
+    {
+        $total = array_sum($this->languages);
+        $math = new Math();
+        foreach ($this->languages as $key => &$language)
+        {
+            $language = $math->getPercentage($total, $language, 2);
+        }
+    }
+    private function sortLanguagesByUsage(): void
+    {
+        arsort($this->languages);
     }
     private function separateTopBy(array $array, int $limit): array
     {

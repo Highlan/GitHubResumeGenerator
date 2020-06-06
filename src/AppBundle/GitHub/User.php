@@ -47,6 +47,6 @@ class User implements UserInterface
 
     public function getLanguages(): array
     {
-        // TODO: Implement getLanguages() method.
+        return $this->repositories->getLanguages();
     }
 }
