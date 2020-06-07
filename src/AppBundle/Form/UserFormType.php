@@ -6,6 +6,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserFormType extends AbstractType
 {
@@ -16,9 +18,12 @@ class UserFormType extends AbstractType
                 'username',
                 null,
                 [
+                    'label' => false,
                     'required' => true,
-                    'attr' =>
-                        ['maxlength' => 8]
+                    'constraints' => [
+                        new NotBlank(),
+                        new Length(['min' => 2, 'max' => 8]),
+                    ],
                 ]
             )
         ;
