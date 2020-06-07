@@ -35,10 +35,11 @@ class MainController extends AbstractController
     public function resumeAction(UserInterface $user)
     {
         return $this->render('/main/resume.html.twig', [
-            'username'     => $user->getUsername(),
-            'blog'         => $user->getBlog(),
-            'repositories' => $user->getRepositories(),
-            'languages'    => $user->getLanguages()
+            'username'           => $user->getUsername(),
+            'blog'               => $user->getBlog(),
+            'repositoriesAmount' => $user->getRepositoriesAmount(),
+            'repositories'       => $user->getRepositories(),
+            'languages'          => $user->getLanguages()
         ]);
     }
 }

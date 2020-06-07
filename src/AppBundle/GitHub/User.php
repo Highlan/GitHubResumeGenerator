@@ -37,6 +37,11 @@ class User implements UserInterface
         return $this->blog;
     }
 
+    public function getRepositoriesAmount(): int
+    {
+        return $this->repositories->count();
+    }
+
     /**
      * @return Repository[]
      */
