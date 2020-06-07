@@ -24,7 +24,7 @@ class MainController extends AbstractController
 
             return $this->redirectToRoute('resume', ['username' => $user['username']]);
         }
-        return $this->render('/main/index_form.html.twig', [
+        return $this->render('main/index.html.twig', [
             'userForm' => $form->createView()
         ]);
     }
