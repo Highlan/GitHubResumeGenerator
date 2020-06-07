@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/floating-labels/floating-labels.css">
+{% endblock %}
 {% block body %}
-
-{% include('index_form.html.twig') %}
-
+        {% include('main/index_form.html.twig') %}
 {% endblock %}

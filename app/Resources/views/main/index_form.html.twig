@@ -1,4 +1,17 @@
-{{ form_start(userForm) }}
-    {{ form_widget(userForm) }}
-    <button type="submit" class="btn btn-primary" formnovalidate>Generate</button>
+{{ form_start(userForm, {'attr': {'class': 'form-signin'}}) }}
+
+    <div class="text-center mb-4">
+        <img class="mb-4" src="{{ asset('asset/images/exozet.jpg') }}" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">GitHub Resume Generator</h1>
+        <p>Please inter your GitHub username</p>
+    </div>
+
+    <div class="form-label-group">
+        {{ form_row(userForm.username, {'attr': {'class': 'form-control', 'maxlength': 8}}) }}
+    </div>
+
+<button class="btn btn-lg btn-primary btn-block" type="submit">Generate</button>
+
+<p class="mt-5 mb-3 text-muted text-center">© Jun, 2020</p>
+
 {{ form_end(userForm) }}
