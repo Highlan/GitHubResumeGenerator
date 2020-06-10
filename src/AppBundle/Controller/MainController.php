@@ -18,15 +18,17 @@ class MainController extends AbstractController
         $form = $this->createForm(UserFormType::class);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
             return $this->redirectToRoute('resume', ['username' => $user['username']]);
         }
-        return $this->render('main/index.html.twig', [
-            'userForm' => $form->createView()
-        ]);
+        return $this->render(
+            'main/index.html.twig',
+            [
+                'userForm' => $form->createView()
+            ]
+        );
     }
 
     /**
@@ -34,12 +36,15 @@ class MainController extends AbstractController
      */
     public function resumeAction(UserInterface $user)
     {
-        return $this->render('/main/resume.html.twig', [
-            'username'           => $user->getUsername(),
-            'blog'               => $user->getBlog(),
-            'repositoriesAmount' => $user->getRepositoriesAmount(),
-            'repositories'       => $user->getRepositories(),
-            'languages'          => $user->getLanguages()
-        ]);
+        return $this->render(
+            '/main/resume.html.twig',
+            [
+                'username'           => $user->getUsername(),
+                'blog'               => $user->getBlog(),
+                'repositoriesAmount' => $user->getRepositoriesAmount(),
+                'repositories'       => $user->getRepositories(),
+                'languages'          => $user->getLanguages()
+            ]
+        );
     }
 }

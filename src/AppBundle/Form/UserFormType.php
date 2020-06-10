@@ -25,8 +25,7 @@ class UserFormType extends AbstractType
                         new Length(['min' => 2, 'max' => 8]),
                     ],
                 ]
-            )
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

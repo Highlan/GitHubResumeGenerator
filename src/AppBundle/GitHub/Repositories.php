@@ -17,7 +17,8 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
     private $languages;
 
 
-    public function __construct(RepositoryInterface ...$repositories) {
+    public function __construct(RepositoryInterface ...$repositories)
+    {
         $this->repositories = $repositories;
     }
 
@@ -47,13 +48,11 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
 
         foreach ($this->repositories as $repository)
         {
-            if (is_null($repository->getLanguage()))
-            {
+            if (is_null($repository->getLanguage())) {
                 continue;
             }
 
-            if (key_exists($repository->getLanguage(), $this->languages))
-            {
+            if (key_exists($repository->getLanguage(), $this->languages)) {
                 $this->languages[$repository->getLanguage()]++;
             }
             else
@@ -71,9 +70,11 @@ class Repositories implements \Countable, \IteratorAggregate, RepositoriesInterf
 
     private function sortRepositoriesByPopularity(): void
     {
-        usort($this->repositories, function($repo1, $repo2) {
-            return $repo2->getPopularity() <=> $repo1->getPopularity();
-        });
+        usort(
+            $this->repositories, function ($repo1, $repo2) {
+                return $repo2->getPopularity() <=> $repo1->getPopularity();
+            }
+        );
     }
     private function calculateLanguagesUsagePercentage(): void
     {

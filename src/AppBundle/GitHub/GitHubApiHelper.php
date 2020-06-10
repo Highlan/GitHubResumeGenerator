@@ -20,9 +20,11 @@ class GitHubApiHelper
 
     public function __construct(Paginator $paginator)
     {
-        $this->httpClient = HttpClient::create(['headers' => [
+        $this->httpClient = HttpClient::create(
+            ['headers' => [
             'Authorization'=> 'token ' . self::TOKEN
-        ]]);
+            ]]
+        );
 
         $this->paginator = $paginator;
     }
@@ -41,7 +43,8 @@ class GitHubApiHelper
         {
             $repositories = $this->request(
                 'GET',
-                sprintf('users/%s/repos?per_page=%d&page=%d',
+                sprintf(
+                    'users/%s/repos?per_page=%d&page=%d',
                     rawurlencode($username),
                     $this->paginator->getPerPage(),
                     $this->paginator->getPage()
@@ -75,8 +78,7 @@ class GitHubApiHelper
     {
         $response = $this->httpClient->request($method, self::BASE_URL . $url, $option);
 
-        if ($response->getStatusCode() !== Response::HTTP_OK)
-        {
+        if ($response->getStatusCode() !== Response::HTTP_OK) {
             ExceptionThrower::throw($response);
         }
 
